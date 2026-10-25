@@ -4,52 +4,54 @@
 <title>文法勇者｜Unit 4 句型解析大冒險</title>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000;--win:#0a0a7a;--line:#fff;--key:#ffe14d;--zh:#a8d8ff;--ok:#0a7a2a;--no:#8a1010;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--s:1;--bg:#000;--win:#0a0a7a;--line:#fff;--key:#ffe14d;--zh:#a8d8ff;--ok:#0a7a2a;--no:#8a1010;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:#fff;font-family:'DotGothic16','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:1.75}
-body{max-width:640px;margin:0 auto;padding:12px}
-.win{border:3px solid var(--line);border-radius:8px;background:var(--win);padding:10px 14px;margin:10px 0;box-shadow:inset 0 0 0 2px #000}
-.win p{margin:6px 0}.c{text-align:center}.r{text-align:right;font-size:13px;opacity:.7}
-.st{display:flex;justify-content:space-between;font-size:14px}
-h1{margin:6px 0;font-size:26px;letter-spacing:2px;color:var(--key)}
-.big{font-size:64px;line-height:1.2}.npc{font-size:40px}
+html,body{margin:0;background:var(--bg);color:#fff;font-family:'DotGothic16','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;font-size:calc(16px*var(--s));line-height:1.75}
+body{max-width:100%;margin:0 auto;padding:calc(12px*var(--s))}
+.win{border:calc(3px*var(--s)) solid var(--line);border-radius:calc(8px*var(--s));background:var(--win);padding:calc(10px*var(--s)) calc(14px*var(--s));margin:calc(10px*var(--s)) 0;box-shadow:inset 0 0 0 calc(2px*var(--s)) #000}
+.win p{margin:calc(6px*var(--s)) 0}.c{text-align:center}.r{text-align:right;font-size:calc(13px*var(--s));opacity:.7}
+.st{display:flex;justify-content:space-between;font-size:calc(14px*var(--s))}
+h1{margin:calc(6px*var(--s)) 0;font-size:calc(26px*var(--s));letter-spacing:calc(2px*var(--s));color:var(--key)}
+.big{font-size:calc(64px*var(--s));line-height:1.2}.npc{font-size:calc(40px*var(--s))}
 b.k{color:var(--key);font-weight:400}
-.zh{color:var(--zh);font-size:14px}
-.cmd{display:block;width:100%;text-align:left;background:none;border:0;border-radius:6px;color:#fff;font:inherit;padding:8px 6px;cursor:pointer}
+.zh{color:var(--zh);font-size:calc(14px*var(--s))}
+.cmd{display:block;width:100%;text-align:left;background:none;border:0;border-radius:calc(6px*var(--s));color:#fff;font:inherit;padding:calc(8px*var(--s)) calc(6px*var(--s));cursor:pointer}
 .cmd:hover:not([disabled]),.cmd:focus-visible{background:rgba(255,255,255,.15);outline:0}
 .cmd:hover:not([disabled])::before{content:"▶ "}
 .cmd[disabled]{opacity:.4;cursor:not-allowed}
 .o.ok{background:var(--ok)}.o.no{background:var(--no)}
 .bl{animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:0}}
-.bar{height:12px;border:2px solid #fff;background:#333;margin:4px 30px}
+.bar{height:calc(12px*var(--s));border:calc(2px*var(--s)) solid #fff;background:#333;margin:calc(4px*var(--s)) calc(30px*var(--s))}
 .bar i{display:block;height:100%;background:#e33;transition:width .4s}
-.hit{animation:sh .35s}@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.ex{padding:8px 0;border-bottom:2px dashed rgba(255,255,255,.3)}
-.q{font-size:18px}.q u{text-decoration:none;border-bottom:2px solid var(--key);color:var(--key)}
-.sm{font-size:13px;color:#ccc;background:none;border:0;font-family:inherit;cursor:pointer;text-decoration:underline}
+.hit{animation:sh .35s}@keyframes sh{25%{transform:translateX(-calc(8px*var(--s)))}75%{transform:translateX(calc(8px*var(--s)))}}
+.ex{padding:calc(8px*var(--s)) 0;border-bottom:calc(2px*var(--s)) dashed rgba(255,255,255,.3)}
+.q{font-size:calc(18px*var(--s))}.q u{text-decoration:none;border-bottom:calc(2px*var(--s)) solid var(--key);color:var(--key)}
+.sm{font-size:calc(13px*var(--s));color:#ccc;background:none;border:0;font-family:inherit;cursor:pointer;text-decoration:underline}
 .stg{position:relative;overflow:hidden}#fx{position:absolute;inset:0;pointer-events:none}
-.hero{position:absolute;left:14px;bottom:6px;font-size:30px}.atk{animation:ak .4s}@keyframes ak{50%{transform:translate(70px,-30px) rotate(40deg)}}
-.sl{position:absolute;left:50%;top:50%;width:150px;height:6px;border-radius:3px;background:#fff;box-shadow:0 0 14px 4px #9cf;transform:translate(-50%,-50%) rotate(-40deg) scaleX(0);animation:sl .3s ease-out .05s forwards}.s2{animation-name:sl2;animation-delay:.15s}
+.hero{position:absolute;left:calc(14px*var(--s));bottom:calc(6px*var(--s));font-size:calc(30px*var(--s))}.atk{animation:ak .4s}@keyframes ak{50%{transform:translate(calc(70px*var(--s)),-calc(30px*var(--s))) rotate(40deg)}}
+.sl{position:absolute;left:50%;top:50%;width:calc(150px*var(--s));height:calc(6px*var(--s));border-radius:calc(3px*var(--s));background:#fff;box-shadow:0 0 calc(14px*var(--s)) calc(4px*var(--s)) #9cf;transform:translate(-50%,-50%) rotate(-40deg) scaleX(0);animation:sl .3s ease-out .05s forwards}.s2{animation-name:sl2;animation-delay:.15s}
 @keyframes sl{60%{transform:translate(-50%,-50%) rotate(-40deg) scaleX(1);opacity:1}100%{transform:translate(-50%,-50%) rotate(-40deg) scaleX(1);opacity:0}}
 @keyframes sl2{60%{transform:translate(-50%,-50%) rotate(40deg) scaleX(1);opacity:1}100%{transform:translate(-50%,-50%) rotate(40deg) scaleX(1);opacity:0}}
-.mg{position:absolute;left:50%;top:45%;font-size:44px;animation:mg .55s ease-out forwards}
-@keyframes mg{0%{transform:translate(-140px,70px) scale(.4)}65%{transform:translate(-20px,0) scale(1.2)}100%{transform:translate(-20px,0) scale(2.6);opacity:0}}
-.dm{position:absolute;left:50%;top:20%;transform:translateX(-50%);font-size:22px;color:var(--key);text-shadow:2px 2px #000;animation:dm .9s ease-out forwards}.dm.r{color:#ff6b6b;top:55%;font-size:30px}
-@keyframes dm{to{transform:translate(-50%,-30px);opacity:0}}
+.mg{position:absolute;left:50%;top:45%;font-size:calc(44px*var(--s));animation:mg .55s ease-out forwards}
+@keyframes mg{0%{transform:translate(-calc(140px*var(--s)),calc(70px*var(--s))) scale(.4)}65%{transform:translate(-calc(20px*var(--s)),0) scale(1.2)}100%{transform:translate(-calc(20px*var(--s)),0) scale(2.6);opacity:0}}
+.dm{position:absolute;left:50%;top:20%;transform:translateX(-50%);font-size:calc(22px*var(--s));color:var(--key);text-shadow:calc(2px*var(--s)) calc(2px*var(--s)) #000;animation:dm .9s ease-out forwards}.dm.r{color:#ff6b6b;top:55%;font-size:calc(30px*var(--s))}
+@keyframes dm{to{transform:translate(-50%,-calc(30px*var(--s)));opacity:0}}
 #en.hit{animation:sh .35s,fb .35s}@keyframes fb{50%{filter:brightness(3)}}
-.lunge{animation:lg .45s}@keyframes lg{40%{transform:translateY(45px) scale(1.35)}100%{transform:none}}
+.lunge{animation:lg .45s}@keyframes lg{40%{transform:translateY(calc(45px*var(--s))) scale(1.35)}100%{transform:none}}
 #en.die{animation:di .9s forwards}@keyframes di{to{opacity:0;transform:rotate(25deg) scale(.2)}}
 .flash{position:fixed;inset:0;background:rgba(255,0,0,.35);pointer-events:none;animation:fl .4s forwards;z-index:8}@keyframes fl{to{opacity:0}}
-.st{padding-right:50px}
-.bt{display:flex;flex-direction:column;height:calc(100vh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:480px}
-.bt .win{margin:5px 0;padding:6px 10px;flex:0 0 auto}.bt .st{font-size:12px;padding:3px 50px 3px 10px}
-.bt .stg{height:104px;padding:2px 10px}.bt .stg .big{font-size:44px;line-height:1.15}.bt .stg .bar{margin:0 40px;height:10px}.bt .nm{margin:2px 0 0;font-size:12px;line-height:1.3}.bt .hero{font-size:24px;bottom:4px}
-.bt .q{font-size:15px;line-height:1.5;margin:2px 0 6px}
-.og{display:grid;grid-template-columns:1fr 1fr;gap:2px 6px}.og.one{grid-template-columns:1fr}
-.bt .cmd{font-size:14px;padding:5px 6px;line-height:1.4}
-.bt .fb{flex:1 1 auto;min-height:0;overflow:auto}.bt .fb p{margin:2px 0;font-size:14px}.bt .fb .zh{font-size:13px}
-.fl{position:absolute;right:8px;top:4px;z-index:2;background:rgba(0,0,0,.35);border:1px solid #fff;border-radius:6px;color:#fff;text-decoration:none;padding:1px 8px}
-.mu{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:10px;z-index:9;background:var(--win);border:2px solid #fff;border-radius:6px;color:#fff;font-size:18px;padding:2px 8px;cursor:pointer}</style></head><body><button class="mu" id="mu" onclick="tm()" aria-label="音效開關">🔊</button><div id="app"></div>
+.st{padding-right:calc(50px*var(--s))}
+.bt{display:flex;flex-direction:column;height:calc(100vh - calc(24px*var(--s)) - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100dvh - calc(24px*var(--s)) - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:0}
+.bt .win{margin:calc(5px*var(--s)) 0;padding:calc(6px*var(--s)) calc(10px*var(--s));flex:0 0 auto}.bt .st{font-size:calc(12px*var(--s));padding:calc(3px*var(--s)) calc(50px*var(--s)) calc(3px*var(--s)) calc(10px*var(--s))}
+.bt .stg{height:calc(104px*var(--s));padding:calc(2px*var(--s)) calc(10px*var(--s))}.bt .stg .big{font-size:calc(44px*var(--s));line-height:1.15}.bt .stg .bar{margin:0 calc(40px*var(--s));height:calc(10px*var(--s))}.bt .nm{margin:calc(2px*var(--s)) 0 0;font-size:calc(12px*var(--s));line-height:1.3}.bt .hero{font-size:calc(24px*var(--s));bottom:calc(4px*var(--s))}
+.bt .q{font-size:calc(15px*var(--s));line-height:1.5;margin:calc(2px*var(--s)) 0 calc(6px*var(--s))}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:calc(2px*var(--s)) calc(6px*var(--s))}.og.one{grid-template-columns:1fr}
+.bt .cmd{font-size:calc(14px*var(--s));padding:calc(5px*var(--s)) calc(6px*var(--s));line-height:1.4}
+.bt .fb{flex:1 1 auto;min-height:calc(100px*var(--s));overflow:auto}.bt .fb p{margin:calc(2px*var(--s)) 0;font-size:calc(14px*var(--s))}.bt .fb .zh{font-size:calc(13px*var(--s))}
+.fl{position:absolute;right:calc(8px*var(--s));top:calc(4px*var(--s));z-index:2;background:rgba(0,0,0,.35);border:calc(1px*var(--s)) solid #fff;border-radius:calc(6px*var(--s));color:#fff;text-decoration:none;padding:calc(1px*var(--s)) calc(8px*var(--s))}
+.mu{position:fixed;top:calc(calc(8px*var(--s)) + env(safe-area-inset-top,0px));right:calc(10px*var(--s));z-index:9;background:var(--win);border:calc(2px*var(--s)) solid #fff;border-radius:calc(6px*var(--s));color:#fff;font-size:calc(18px*var(--s));padding:calc(2px*var(--s)) calc(8px*var(--s));cursor:pointer}@media (min-aspect-ratio:5/4) and (min-width:700px){.bt{display:grid;grid-template-columns:30% 1fr;grid-template-rows:auto auto minmax(0,1fr);column-gap:calc(12px*var(--s))}.bt>.st{grid-column:1/3}.bt>.stg{grid-column:1;grid-row:2/4;height:auto;min-height:calc(150px*var(--s))}.bt>.win:nth-child(3){grid-column:2;grid-row:2;display:flex;flex-direction:column;justify-content:center}.bt>.fb{grid-column:2;grid-row:3}.bt .og,.bt .og.one{grid-template-columns:1fr}.bt .q{margin-bottom:calc(10px*var(--s))}.bt .stg .big{font-size:calc(80px*var(--s))}}
+.exe{font-size:calc(25px*var(--s));line-height:1.6;margin:calc(14px*var(--s)) 0 calc(8px*var(--s))}.exz{font-size:calc(17px*var(--s));line-height:1.6;margin-bottom:calc(14px*var(--s))}.nav{display:flex;justify-content:space-between;gap:calc(10px*var(--s))}.nav .cmd{width:auto;padding:calc(8px*var(--s)) calc(14px*var(--s));border:2px solid #fff}
+</style></head><body><button class="mu" id="mu" onclick="tm()" aria-label="音效開關">🔊</button><div id="app"></div>
 <script>
 const A=[
 {icon:"🌿",name:"初心者草原・限定用法",npc:"👴",en:"史萊姆",enemy:"💧",get:"限定關係子句（who / which / that / whose）",
@@ -147,22 +149,26 @@ const S={click:[[520,.05]],ok:[[660,.07],[880,.07],[1320,.16]],no:[[220,.12],[15
 function snd(t){if(mute)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state=='suspended')AC.resume();let at=AC.currentTime;S[t].forEach(([f,d])=>{const o=AC.createOscillator(),g=AC.createGain();o.type=(t=='no'||t=='lose')?'sawtooth':'square';o.frequency.value=f;g.gain.setValueAtTime(.07,at);g.gain.exponentialRampToValueAtTime(.001,at+d);o.connect(g);g.connect(AC.destination);o.start(at);o.stop(at+d);at+=d*.9})}catch(e){}}
 function tm(){mute=!mute;$('mu').textContent=mute?'🔇':'🔊';snd('click')}
 document.addEventListener('click',e=>{if(e.target.closest('.cmd:not(.o),.sm'))snd('click')});
-const sw=h=>{$('app').innerHTML=h;scrollTo(0,0)},si=()=>`<span>🗡️ 勇者 LV${P.lv}</span><span>HP ${P.hp}/${P.max}</span><span>EXP ${P.exp}</span>`,stat=()=>`<div class="win st" id="st">${si()}</div>`;
+const sw=h=>{$('app').innerHTML=h;scrollTo(0,0);fit()},si=()=>`<span>🗡️ 勇者 LV${P.lv}</span><span>HP ${P.hp}/${P.max}</span><span>EXP ${P.exp}</span>`,stat=()=>`<div class="win st" id="st">${si()}</div>`;
 function title(){sw(`<div class="win c"><h1>⚔ 文法勇者 ⚔</h1><p>Unit 4 句型解析大冒險</p><div class="big">🐉</div><p>魔王偷走了句子裡的逗號與句型，<br>勇者啊，踏上旅程奪回它們吧！</p><button class="cmd" onclick="map()">開始冒險</button></div>`)}
 function map(){P.hp=P.max;sw(stat()+`<div class="win"><p>【冒險地圖】要前往哪裡？<br>🎒 寶物：${P.tr.join(' ')||'尚無'}<br><span class="zh">（旅店休息，HP 全回復！）</span></p>`+A.map((a,i)=>{const lk=i==4?P.done.filter(d=>d<4).length<4:i>4&&!P.done.includes(i-5);return (i==5?'<p class="zh">💎 進階試煉（通過對應關卡後開啟，可獲得寶物）</p>':'')+`<button class="cmd" ${lk?'disabled':''} onclick="go(${i})">${a.icon} ${a.name}${P.done.includes(i)?' ✔':''}${lk?' 🔒':''}</button>`}).join('')+`</div>`)}
 function go(i){ai=i;pg=0;talk()}
 function talk(){const a=A[ai],last=pg==a.talk.length-1;sw(stat()+`<div class="win"><div class="npc">${a.npc}</div><p>${fm(a.talk[pg])}</p><p class="r">（${pg+1}/${a.talk.length}）</p><button class="cmd" onclick="${last?'nx()':'pg++;talk()'}">${last?(a.ex?'看例句':'戰鬥開始！'):'繼續'} <span class="bl">▼</span></button><button class="sm" onclick="map()">回地圖</button></div>`)}
 function nx(){A[ai].ex?exs():fight()}
-function exs(){sw(stat()+`<div class="win"><p>📜【例句集】<b class="k">金色字</b>是重點！</p>`+A[ai].ex.map(([e,z])=>`<div class="ex"><div>${fm(e)}</div><div class="zh">${z}</div></div>`).join('')+`<button class="cmd" onclick="fight()">前往戰鬥 ⚔</button></div>`)}
+let ei=0;
+function exs(){ei=0;ex1()}
+function ex1(){const a=A[ai],[e,z]=a.ex[ei],last=ei==a.ex.length-1;sw(stat()+`<div class="win"><p>📜【例句 ${ei+1} / ${a.ex.length}】<span class="zh">金色字是重點</span></p><div class="exe">${fm(e)}</div><div class="zh exz">${z}</div><div class="nav">${ei?'<button class="cmd" onclick="ei--;ex1()">◀ 上一句</button>':'<span></span>'}<button class="cmd" onclick="${last?'fight()':'ei++;ex1()'}">${last?'前往戰鬥 ⚔':'下一句 ▶'}</button></div></div>`)}
 function fight(){qs=A[ai].q.slice();n=eh=qs.length;ask()}
 function ask(){const a=A[ai],[s,o]=qs[0];busy=0;sw('<div class="bt">'+stat()+`<div class="win c stg"><div class="hero" id="hr">🗡️</div><div class="big" id="en">${a.enemy}</div><div id="fx"></div><button class="sm fl" onclick="flee()">🏃 逃跑</button><div class="bar"><i style="width:${eh/n*100}%"></i></div><p class="nm">${a.en}　出現了！</p></div><div class="win"><p class="q">${fm(s).replace('____','<u>　　　</u>')}</p><div class="og${o.some(t=>t.length>22)?' one':''}">`+o.map((t,j)=>`<button class="cmd o" id="o${j}" onclick="pick(${j})">${L[j]}. ${t}</button>`).join('')+`</div></div><div class="win fb" id="msg"><p class="zh">⚔ 選擇正確答案，攻擊敵人！</p></div></div>`)}
 function pick(j){if(busy)return;busy=1;const q=qs.shift(),ok=j==q[2];$('o'+q[2]).classList.add('ok');snd(ok?'ok':'no');if(ok)eh--;else{$('o'+j).classList.add('no');P.hp=Math.max(0,P.hp-5);qs.push(q);$('st').innerHTML=si()}fx(ok);
-$('msg').innerHTML=`<p>${ok?'⚡ 會心一擊！'+A[ai].en+'受到傷害！':'💥 答錯了！勇者受到 5 點傷害…'}</p><p class="zh">${fm(q[3])}</p><button class="cmd" onclick="after()">繼續 <span class="bl">▼</span></button>`}
+$('msg').innerHTML=`<p>${ok?'⚡ 會心一擊！'+A[ai].en+'受到傷害！':'💥 答錯了！勇者受到 5 點傷害…'}</p><p class="zh">${fm(q[3])}</p><button class="cmd" onclick="after()">繼續 <span class="bl">▼</span></button>`;fit()}
 function fx(ok){const f=$('fx'),en=$('en');if(!f)return;if(ok){const m=Math.random()<.5;$('hr').classList.add('atk');f.innerHTML=m?'<i class="sl"></i><i class="sl s2"></i>':'<span class="mg">'+['🔥','⚡','❄️','✨'][Math.random()*4|0]+'</span>';setTimeout(()=>{en.classList.add('hit');f.insertAdjacentHTML('beforeend','<span class="dm">'+(m?'斬擊！':'魔法！')+'</span>');if(eh<=0)en.classList.add('die')},m?200:380)}else{en.classList.add('lunge');setTimeout(()=>{const a=$('app');a.classList.add('hit');setTimeout(()=>a.classList.remove('hit'),400);document.body.insertAdjacentHTML('beforeend','<div class="flash"></div>');setTimeout(()=>{const x=document.querySelector('.flash');if(x)x.remove()},400);f.innerHTML='<span class="dm r">-5</span>'},250)}}
 function flee(){busy=1;sw('<div class="win c"><div class="big">💨</div><p>勇者逃跑了！<br>回到冒險地圖……</p></div>');setTimeout(map,900)}
 function after(){if(P.hp<=0){snd('lose');sw(`<div class="win c"><div class="big">💀</div><p>勇者倒下了……<br>被抬回村莊復活！再挑戰一次吧。</p><button class="cmd" onclick="map()">回到地圖</button></div>`);return}eh<=0?win():ask()}
 function win(){const a=A[ai],l0=P.lv;let g='';if(a.tr&&!P.tr.includes(a.tr)){P.tr.push(a.tr);g='<br>🎁 獲得寶物：'+a.tr+'！'}if(!P.done.includes(ai)){P.done.push(ai);P.exp+=30}P.lv=1+Math.floor(P.exp/40);P.max=30+5*(P.lv-1);snd(P.lv>l0||ai==4?'lv':'win');
 if(ai==4)return sw(`<div class="win c"><div class="big">🏆</div><h1>魔王被打倒了！</h1><p>逗號回到了句子裡，和平回到了英文世界。<br>你已學會：限定與非限定關代、including、In addition / Besides。</p><button class="cmd" onclick="map()">回到地圖複習</button></div>`);
 sw(stat()+`<div class="win c"><div class="big">🎉</div><p>打倒了 ${a.en}！<br>獲得 30 經驗值${g}${P.lv>l0?'<br>✨ 升級了！LV'+P.lv:''}</p><p class="zh">學會了：${a.get}</p><button class="cmd" onclick="map()">回到地圖</button></div>`)}
+function fit(){const R=document.documentElement,bt=document.querySelector('.bt'),wide=innerWidth>=700&&innerWidth/innerHeight>=1.25;let s=bt?(wide?Math.min(innerWidth/360,innerHeight/280,3.2):Math.min(innerWidth/400,innerHeight/400,2.6)):Math.min(innerWidth/440,2.4),lo=bt?1:1.05;s=Math.max(1,s);const set=()=>R.style.setProperty('--s',s.toFixed(3));set();const fb=bt&&$('msg');for(let k=0;k<80&&s>lo&&(R.scrollHeight>innerHeight+1||(fb&&fb.scrollHeight>fb.clientHeight+1));k++){s=Math.max(lo,s*.97);set()}}
+fit();addEventListener('resize',fit);
 title();
 </script></body></html>
