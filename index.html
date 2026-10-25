@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>文法勇者｜Unit 4 句型解析大冒險</title>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--win:#0a0a7a;--line:#fff;--key:#ffe14d;--zh:#a8d8ff;--ok:#0a7a2a;--no:#8a1010;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:#fff;font-family:'DotGothic16','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;font-size:16px;line-height:1.75}
+body{max-width:640px;margin:0 auto;padding:12px}
+.win{border:3px solid var(--line);border-radius:8px;background:var(--win);padding:10px 14px;margin:10px 0;box-shadow:inset 0 0 0 2px #000}
+.win p{margin:6px 0}.c{text-align:center}.r{text-align:right;font-size:13px;opacity:.7}
+.st{display:flex;justify-content:space-between;font-size:14px}
+h1{margin:6px 0;font-size:26px;letter-spacing:2px;color:var(--key)}
+.big{font-size:64px;line-height:1.2}.npc{font-size:40px}
+b.k{color:var(--key);font-weight:400}
+.zh{color:var(--zh);font-size:14px}
+.cmd{display:block;width:100%;text-align:left;background:none;border:0;border-radius:6px;color:#fff;font:inherit;padding:8px 6px;cursor:pointer}
+.cmd:hover:not([disabled]),.cmd:focus-visible{background:rgba(255,255,255,.15);outline:0}
+.cmd:hover:not([disabled])::before{content:"▶ "}
+.cmd[disabled]{opacity:.4;cursor:not-allowed}
+.o.ok{background:var(--ok)}.o.no{background:var(--no)}
+.bl{animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:0}}
+.bar{height:12px;border:2px solid #fff;background:#333;margin:4px 30px}
+.bar i{display:block;height:100%;background:#e33;transition:width .4s}
+.hit{animation:sh .35s}@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.ex{padding:8px 0;border-bottom:2px dashed rgba(255,255,255,.3)}
+.q{font-size:18px}.q u{text-decoration:none;border-bottom:2px solid var(--key);color:var(--key)}
+.sm{font-size:13px;color:#ccc;background:none;border:0;font-family:inherit;cursor:pointer;text-decoration:underline}
+.stg{position:relative;overflow:hidden}#fx{position:absolute;inset:0;pointer-events:none}
+.hero{position:absolute;left:14px;bottom:6px;font-size:30px}.atk{animation:ak .4s}@keyframes ak{50%{transform:translate(70px,-30px) rotate(40deg)}}
+.sl{position:absolute;left:50%;top:50%;width:150px;height:6px;border-radius:3px;background:#fff;box-shadow:0 0 14px 4px #9cf;transform:translate(-50%,-50%) rotate(-40deg) scaleX(0);animation:sl .3s ease-out .05s forwards}.s2{animation-name:sl2;animation-delay:.15s}
+@keyframes sl{60%{transform:translate(-50%,-50%) rotate(-40deg) scaleX(1);opacity:1}100%{transform:translate(-50%,-50%) rotate(-40deg) scaleX(1);opacity:0}}
+@keyframes sl2{60%{transform:translate(-50%,-50%) rotate(40deg) scaleX(1);opacity:1}100%{transform:translate(-50%,-50%) rotate(40deg) scaleX(1);opacity:0}}
+.mg{position:absolute;left:50%;top:45%;font-size:44px;animation:mg .55s ease-out forwards}
+@keyframes mg{0%{transform:translate(-140px,70px) scale(.4)}65%{transform:translate(-20px,0) scale(1.2)}100%{transform:translate(-20px,0) scale(2.6);opacity:0}}
+.dm{position:absolute;left:50%;top:20%;transform:translateX(-50%);font-size:22px;color:var(--key);text-shadow:2px 2px #000;animation:dm .9s ease-out forwards}.dm.r{color:#ff6b6b;top:55%;font-size:30px}
+@keyframes dm{to{transform:translate(-50%,-30px);opacity:0}}
+#en.hit{animation:sh .35s,fb .35s}@keyframes fb{50%{filter:brightness(3)}}
+.lunge{animation:lg .45s}@keyframes lg{40%{transform:translateY(45px) scale(1.35)}100%{transform:none}}
+#en.die{animation:di .9s forwards}@keyframes di{to{opacity:0;transform:rotate(25deg) scale(.2)}}
+.flash{position:fixed;inset:0;background:rgba(255,0,0,.35);pointer-events:none;animation:fl .4s forwards;z-index:8}@keyframes fl{to{opacity:0}}
+.st{padding-right:50px}
+.bt{display:flex;flex-direction:column;height:calc(100vh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:480px}
+.bt .win{margin:5px 0;padding:6px 10px;flex:0 0 auto}.bt .st{font-size:12px;padding:3px 50px 3px 10px}
+.bt .stg{height:104px;padding:2px 10px}.bt .stg .big{font-size:44px;line-height:1.15}.bt .stg .bar{margin:0 40px;height:10px}.bt .nm{margin:2px 0 0;font-size:12px;line-height:1.3}.bt .hero{font-size:24px;bottom:4px}
+.bt .q{font-size:15px;line-height:1.5;margin:2px 0 6px}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:2px 6px}.og.one{grid-template-columns:1fr}
+.bt .cmd{font-size:14px;padding:5px 6px;line-height:1.4}
+.bt .fb{flex:1 1 auto;min-height:0;overflow:auto}.bt .fb p{margin:2px 0;font-size:14px}.bt .fb .zh{font-size:13px}
+.mu{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));right:10px;z-index:9;background:var(--win);border:2px solid #fff;border-radius:6px;color:#fff;font-size:18px;padding:2px 8px;cursor:pointer}</style></head><body><button class="mu" id="mu" onclick="tm()" aria-label="音效開關">🔊</button><div id="app"></div>
+<script>
+const A=[
+{icon:"🌿",name:"初心者草原・限定用法",npc:"👴",en:"史萊姆",enemy:"💧",get:"限定關係子句（who / which / that / whose）",
+talk:[
+"*村長*：「勇者啊，魔王用『長句子』封印了英文！先學小幫手 *關係代名詞*：它能把一句話『黏』在名詞後面，說明這個名詞。被說明的名詞叫 *先行詞*。」",
+"公式：\n*先行詞 ＋ who / which / that ＋ 一句話*\nThe boy *who broke the window* apologized.\n→ who 後面這一串，就是在說「是『哪個』男孩」。",
+"【限定用法】＝ *沒有逗號*。\n它負責「點名：是哪一個」，拿掉就不知道在說誰，所以是必要資訊。\n口訣：*沒逗號＝點名用，不能刪！*",
+"選哪個小幫手？\n人：*who* / that　物：*which* / that\n人的受詞：whom / that\n「…的」：*whose* ＋ 名詞\n限定用法可用 *that*；當「受詞」的關代 *可以省略*：\nThe cake (which) Mom made is great.",
+"小提醒：先行詞如果是獨一無二的（如 Taipei 101），就不需要『點名』，要改成補充用的逗號用法 → 前往下一關！"],
+ex:[["The boy *who* broke the window apologized.","打破窗戶的那個男孩道歉了。（who＝主詞，人）"],
+["I like the cake *which* my mom made.","我喜歡媽媽做的那個蛋糕。（which＝受詞，可省略）"],
+["This is the book *that* changed my life.","這是改變我人生的那本書。（限定可用 that）"],
+["The girl (*whom*) I met yesterday is my new classmate.","我昨天遇到的那個女孩是我的新同學。（whom 可省略）"],
+["I know a boy *whose* father is a pilot.","我認識一個爸爸是飛行員的男孩。（whose＝…的）"],
+["Students *who* don’t finish homework will stay after class.","沒寫完作業的學生要留下來。（只有「沒寫完」的人）"]],
+q:[["The girl ____ sits next to me is Amy.",["which","who","whose",", who"],1,"先行詞 The girl 是人，後面沒有逗號 → 限定用 *who*。"],
+["The movie ____ we watched last night was boring.",["who","whom","that",", that"],2,"電影是物，限定用法可用 *that*；逗號後不能用 that，whom 則指人。"],
+["I have a friend ____ mother is a famous singer.",["who","whose","which","that"],1,"「朋友的媽媽」＝所有格 *whose*。"],
+["哪一句的關代『可以省略』？",["The boy who sings well is Tom.","The pen which is on the desk is mine.","The cake that Mom made is delicious.","The teacher who teaches us math is kind."],2,"C 的 that 是 made 的「受詞」，受詞關代可省略；其餘的關代都是主詞，不能省。"]]},
+{icon:"🕳️",name:"逗號洞窟・非限定（句型①）",npc:"🧙",en:"吸血蝙蝠",enemy:"🦇",get:"句型① N, + which / who（非限定）",
+talk:[
+"*賢者*：「【非限定用法】＝ *有逗號*。像在旁邊小聲補充，拿掉也不影響句子完整。」\nMy mother*, who is a nurse,* works at night.\n（我只有一個媽媽，不用點名，只是補充她是護理師。）",
+"什麼時候要加逗號？\n*A. 先行詞獨一無二*：專有名詞、my mother、the Sun…\n*B. which 指前面『整句話』*：…, which ＝『這件事』",
+"三條鐵則：\n① 逗號後 *不能用 that*\n② whom / which *不能省略*\n③ 人用 who / whom，物用 which",
+"對比一下！\nStudents who work hard pass the exam.（限定：只有努力的）\nStudents, who work hard, pass the exam.（非限定：全部學生都努力）\n*逗號差一個，意思差很多！*",
+"進階奧義：不定量詞 ＋ of which / of whom\nLily got many presents, *one of which* was an album.\n＝ …, *and one of them* was an album.\n人用 of whom，物用 of which；可換成 and / but ＋ them。"],
+ex:[["Taipei 101*, which* was completed in 2004*,* is a famous landmark.","台北101於2004年落成，是著名的地標。（獨一無二）"],
+["My mother*, who* is a nurse, works at night.","我媽媽是護理師，她在夜間工作。"],
+["People give money or food to the poor*, which* is another religious duty of Muslims.","人們捐錢或食物給窮人，這是穆斯林的另一項宗教義務。（課本・which＝整句話）"],
+["George forgot to save the file*, which* took him a whole afternoon to redo the work.","George 忘了存檔，這害他花了一整個下午重做。（which＝忘記存檔這件事）"],
+["Lily got many presents*, one of which* was an autographed album.","Lily 收到許多禮物，其中一件是親簽專輯。"],
+["Brian met many people at the party*, none of whom* he had known before.","Brian 在派對上認識許多人，其中沒有人是他以前認識的。"],
+["Students who work hard pass. ／ Students*, who* work hard, pass.","前句：只有努力的學生；後句：全部學生都努力。"]],
+q:[["Niagara Falls, ____ is one of the largest falls on the planet, is located on the border between America and Canada.",[", where",", which","which","where"],1,"Niagara Falls 獨一無二 → 逗號＋which 補充；where 指地點，不合。"],
+["Karen had a big fight with many staff in this restaurant, ____ was the manager.",["one of whom","one of them","who one","whose one"],0,"人＋不定量詞 → *one of whom*；one of them 前面需要 and 才能連接。"],
+["Mr. Lin, ____ teaches us English, is very funny.",["that","who","whom","whose"],1,"Mr. Lin 是專有名詞，逗號後用 *who*（that 不行，whom 是受格）。"],
+["Mary failed the exam, ____ made her parents upset.",["that","what","which","who"],2,"先行詞是『整件事』，用 *which*；逗號後不能用 that。"],
+["Mount Jade____ is the highest mountain in Taiwan, attracts many hikers.",["that",", that",", which","which"],2,"玉山獨一無二，要補充 → *, which*。"]]},
+{icon:"🌲",name:"包含森林・including（句型②）",npc:"🧚",en:"森林狼",enemy:"🐺",get:"句型② including / inclusive of / N + included",
+talk:[
+"*精靈*：「*including* ＝『包括…』。先講大類別，再用逗號『舉例』。」\n公式：*S ＋ V, including ＋ N / V-ing*\nShe has visited several countries*, including Japan and Spain*.",
+"including 後面只放 *名詞或 V-ing*，不放完整句子。它是介系詞，不是動詞：\n✗ …, include apples\n✓ …, *including* apples",
+"雙胞胎招式：\n*inclusive of*＝including（後接 N / V-ing）\n*N / V-ing ＋ included* 放在後面：\nThe room costs NT$800, *breakfast included*.\n口訣：*逗號後面舉例子，including 來幫忙；放後面就用 included。*"],
+ex:[["There are many traditional ways to celebrate Eid al-Fitr*, including* worshipping, feasting, and giving to charity.","慶祝開齋節有許多傳統方式，包括敬拜、享用盛宴與捐助慈善。（課本）"],
+["The festivals hold forums on various areas of Islamic culture*, including* music and tourism.","這些節慶舉辦伊斯蘭文化各領域的論壇，包含音樂與旅遊。（課本）"],
+["The hostel charges NT$800 per night, a bed and a hot shower *included*.","這間青年旅社一晚800元，包含一張床和熱水淋浴。"],
+["Derrick ate up all the food in the fridge, *inclusive of* his brother’s breakfast.","Derrick 把冰箱裡的食物吃光，連弟弟的早餐也包含在內。"],
+["She has visited several countries*, including* Japan and Spain.","她去過幾個國家，包括日本和西班牙。"],
+["Many pets*, including* dogs and rabbits, need daily exercise.","許多寵物，包括狗和兔子，每天都需要運動。（也可放句中）"]],
+q:[["Derrick was so hungry that he ate up all the food in the fridge, ____ his brother’s breakfast.",["includes","included","inclusive of","include"],2,"後面是名詞片語 → *inclusive of ＋ N*。"],
+["The hostel charges NT$800 per night, a bed and a hot shower ____.",["including","included","include","inclusive"],1,"名詞放前面，用 *N ＋ included*。"],
+["There are many ways to relax, ____ reading and swimming.",["include","included","including","inclusion"],2,"逗號後舉例 → *including*（include 是動詞，不能直接接在逗號後）。"],
+["哪一句是正確的？",["We sell many fruits, including apples and bananas.","We sell many fruits, include apples and bananas.","We sell many fruits, including we sell apples.","We sell many fruits including, apples and bananas."],0,"including 後面直接接名詞；B 動詞誤用、C 接了完整句、D 逗號位置錯。"]]},
+{icon:"🗼",name:"此外高塔・In addition / Besides（句型③）",npc:"🛡️",en:"惡龍",enemy:"🐲",get:"句型③ In addition / Besides、except 與 apart from 的差別",
+talk:[
+"*騎士*：「*『此外』有兩大類，看後面接什麼！*」\n① 副詞（後接完整句）：\n*In addition / Besides / What’s more / Moreover / Additionally,* S ＋ V\n② 介系詞（後接 N / V-ing）：\n*In addition to / Besides / Apart from* ＋ N / V-ing, S ＋ V",
+"超好記：有 *to* 或 *from* 的是介系詞，後面不能直接放句子！\n✗ In addition to he is smart.\n✓ In addition to *being* smart, he is kind.",
+"最後的陷阱：*except* 是「除了…（不包含）」。\n*except*：只能排除\n*apart from / aside from*：兩用！可排除，也可表「另外還有」＝ besides\n⚠ except 放句首要加 for：*Except for* English, …"],
+ex:[["*In addition to* feasting, Eid al-Fitr is about kindness.","除了享用盛宴，開齋節也關乎仁慈。（課本）"],
+["*Besides*, the festivals hold forums on various areas of Islamic culture.","除此之外，這些節慶還舉辦各領域的論壇。（Besides＝副詞＋逗號）"],
+["Frank practices intermittent fasting. *Moreover*, he goes jogging three times a week.","Frank 實行間歇性斷食，此外他每週晨跑三次。"],
+["*Besides* a big ice cream cake, Lucy ordered pizza and fried chicken.","除了大冰淇淋蛋糕，Lucy 還點了披薩和炸雞。"],
+["Mandy ate all the food *apart from* the broccoli.","Mandy 吃光所有食物，除了花椰菜。（排除，沒吃）"],
+["Mandy ate extra broccoli *apart from* the food on her plate.","Mandy 除了盤中食物，還多吃花椰菜。（另外還有，有吃）"],
+["*Except for* English, Fiona hates all subjects.","除了英文，Fiona 討厭所有科目。（except 放句首要加 for）"]],
+q:[["____ going hiking on weekends, Roger also goes cycling once a month.",["In addition","What’s more","Additionally","Apart from"],3,"後面是 V-ing → 要用介系詞 *Apart from*；其餘是副詞，後面要接完整句。"],
+["We can’t go camping because of the typhoon. ____, one of our friends has caught a cold.",["Except","Apart from","What’s more","In addition to"],2,"逗號後是完整句 → 副詞 *What’s more*。"],
+["____ English, Fiona hates all subjects.",["Except","Except for","In addition","Moreover"],1,"except 放句首要加 *for*。"],
+["Mandy hates broccoli, so she ate all the food ____ the broccoli.",["in addition to","besides","except","moreover"],2,"沒吃花椰菜（排除）→ *except*。"]]},
+{icon:"🏰",name:"魔王城・最終決戰",npc:"😈",en:"文法魔王",enemy:"😈",get:"全部句型",
+talk:["*魔王*：「哇哈哈！我偷走了所有逗號，看你怎麼分辨限定與非限定！」","勇者啊，用四關學到的力量決戰吧！答對就能攻擊，答錯會受傷，題目還會再出現。"],
+q:[["Ted invited all his classmates to the party, ____ their homeroom teacher.",["include","included","inclusive","inclusive of"],3,"後接名詞 → *inclusive of*。"],
+["Miranda____ is Linda’s youngest sister, is going to move into Linda’s apartment.",["who",", that",", who",", one of whom"],2,"Miranda 是專有名詞 → *, who*。（缺逗號會變成限定；逗號後不能用 that；one of whom 前面還需要連接詞。）"],
+["The boy ____ is wearing a red cap is my cousin.",[", who","who",", whom",", which"],1,"在「點名」是哪個男孩，不加逗號 → *who*。"],
+["Lisa found out the man, ____ she met through the app, was her high-school classmate.",["whom met her",", that she met",", whom she met","who did she meet"],2,"逗號後用 whom（受格），不能用 that。"],
+["Kelly is on a tight budget. ____, her rent has increased.",["Besides","Include","Except","Including"],0,"後接完整句 → 副詞 *Besides*。"]]}
+];
+const L=["A","B","C","D"],$=i=>document.getElementById(i),fm=s=>s.replace(/\*(.+?)\*/g,'<b class=k>$1</b>').replace(/\n/g,'<br>');
+const P={hp:30,max:30,exp:0,lv:1,done:[]};let ai,pg,qs,eh,n,busy,AC,mute=0;
+const S={click:[[520,.05]],ok:[[660,.07],[880,.07],[1320,.16]],no:[[220,.12],[150,.25]],win:[[523,.12],[659,.12],[784,.12],[1047,.3]],lv:[[523,.1],[659,.1],[784,.1],[1047,.1],[784,.1],[1047,.1],[1319,.4]],lose:[[392,.2],[330,.2],[262,.2],[196,.5]]};
+function snd(t){if(mute)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state=='suspended')AC.resume();let at=AC.currentTime;S[t].forEach(([f,d])=>{const o=AC.createOscillator(),g=AC.createGain();o.type=(t=='no'||t=='lose')?'sawtooth':'square';o.frequency.value=f;g.gain.setValueAtTime(.07,at);g.gain.exponentialRampToValueAtTime(.001,at+d);o.connect(g);g.connect(AC.destination);o.start(at);o.stop(at+d);at+=d*.9})}catch(e){}}
+function tm(){mute=!mute;$('mu').textContent=mute?'🔇':'🔊';snd('click')}
+document.addEventListener('click',e=>{if(e.target.closest('.cmd:not(.o),.sm'))snd('click')});
+const sw=h=>{$('app').innerHTML=h;scrollTo(0,0)},si=()=>`<span>🗡️ 勇者 LV${P.lv}</span><span>HP ${P.hp}/${P.max}</span><span>EXP ${P.exp}</span>`,stat=()=>`<div class="win st" id="st">${si()}</div>`;
+function title(){sw(`<div class="win c"><h1>⚔ 文法勇者 ⚔</h1><p>Unit 4 句型解析大冒險</p><div class="big">🐉</div><p>魔王偷走了句子裡的逗號與句型，<br>勇者啊，踏上旅程奪回它們吧！</p><button class="cmd" onclick="map()">開始冒險</button></div>`)}
+function map(){P.hp=P.max;sw(stat()+`<div class="win"><p>【冒險地圖】要前往哪裡？<br><span class="zh">（旅店休息，HP 全回復！）</span></p>`+A.map((a,i)=>{const lk=i==4&&P.done.filter(d=>d<4).length<4;return `<button class="cmd" ${lk?'disabled':''} onclick="go(${i})">${a.icon} ${a.name}${P.done.includes(i)?' ✔':''}${lk?' 🔒':''}</button>`}).join('')+`</div>`)}
+function go(i){ai=i;pg=0;talk()}
+function talk(){const a=A[ai],last=pg==a.talk.length-1;sw(stat()+`<div class="win"><div class="npc">${a.npc}</div><p>${fm(a.talk[pg])}</p><p class="r">（${pg+1}/${a.talk.length}）</p><button class="cmd" onclick="${last?'nx()':'pg++;talk()'}">${last?(a.ex?'看例句':'戰鬥開始！'):'繼續'} <span class="bl">▼</span></button><button class="sm" onclick="map()">回地圖</button></div>`)}
+function nx(){A[ai].ex?exs():fight()}
+function exs(){sw(stat()+`<div class="win"><p>📜【例句集】<b class="k">金色字</b>是重點！</p>`+A[ai].ex.map(([e,z])=>`<div class="ex"><div>${fm(e)}</div><div class="zh">${z}</div></div>`).join('')+`<button class="cmd" onclick="fight()">前往戰鬥 ⚔</button></div>`)}
+function fight(){qs=A[ai].q.slice();n=eh=qs.length;ask()}
+function ask(){const a=A[ai],[s,o]=qs[0];busy=0;sw('<div class="bt">'+stat()+`<div class="win c stg"><div class="hero" id="hr">🗡️</div><div class="big" id="en">${a.enemy}</div><div id="fx"></div><div class="bar"><i style="width:${eh/n*100}%"></i></div><p class="nm">${a.en}　出現了！</p></div><div class="win"><p class="q">${fm(s).replace('____','<u>　　　</u>')}</p><div class="og${o.some(t=>t.length>22)?' one':''}">`+o.map((t,j)=>`<button class="cmd o" id="o${j}" onclick="pick(${j})">${L[j]}. ${t}</button>`).join('')+`</div></div><div class="win fb" id="msg"><p class="zh">⚔ 選擇正確答案，攻擊敵人！</p></div></div>`)}
+function pick(j){if(busy)return;busy=1;const q=qs.shift(),ok=j==q[2];$('o'+q[2]).classList.add('ok');snd(ok?'ok':'no');if(ok)eh--;else{$('o'+j).classList.add('no');P.hp=Math.max(0,P.hp-5);qs.push(q);$('st').innerHTML=si()}fx(ok);
+$('msg').innerHTML=`<p>${ok?'⚡ 會心一擊！'+A[ai].en+'受到傷害！':'💥 答錯了！勇者受到 5 點傷害…'}</p><p class="zh">${fm(q[3])}</p><button class="cmd" onclick="after()">繼續 <span class="bl">▼</span></button>`}
+function fx(ok){const f=$('fx'),en=$('en');if(!f)return;if(ok){const m=Math.random()<.5;$('hr').classList.add('atk');f.innerHTML=m?'<i class="sl"></i><i class="sl s2"></i>':'<span class="mg">'+['🔥','⚡','❄️','✨'][Math.random()*4|0]+'</span>';setTimeout(()=>{en.classList.add('hit');f.insertAdjacentHTML('beforeend','<span class="dm">'+(m?'斬擊！':'魔法！')+'</span>');if(eh<=0)en.classList.add('die')},m?200:380)}else{en.classList.add('lunge');setTimeout(()=>{const a=$('app');a.classList.add('hit');setTimeout(()=>a.classList.remove('hit'),400);document.body.insertAdjacentHTML('beforeend','<div class="flash"></div>');setTimeout(()=>{const x=document.querySelector('.flash');if(x)x.remove()},400);f.innerHTML='<span class="dm r">-5</span>'},250)}}
+function after(){if(P.hp<=0){snd('lose');sw(`<div class="win c"><div class="big">💀</div><p>勇者倒下了……<br>被抬回村莊復活！再挑戰一次吧。</p><button class="cmd" onclick="map()">回到地圖</button></div>`);return}eh<=0?win():ask()}
+function win(){const a=A[ai],l0=P.lv;if(!P.done.includes(ai)){P.done.push(ai);P.exp+=30}P.lv=1+Math.floor(P.exp/40);P.max=30+5*(P.lv-1);snd(P.lv>l0||ai==4?'lv':'win');
+if(ai==4)return sw(`<div class="win c"><div class="big">🏆</div><h1>魔王被打倒了！</h1><p>逗號回到了句子裡，和平回到了英文世界。<br>你已學會：限定與非限定關代、including、In addition / Besides。</p><button class="cmd" onclick="map()">回到地圖複習</button></div>`);
+sw(stat()+`<div class="win c"><div class="big">🎉</div><p>打倒了 ${a.en}！<br>獲得 30 經驗值${P.lv>l0?'<br>✨ 升級了！LV'+P.lv:''}</p><p class="zh">學會了：${a.get}</p><button class="cmd" onclick="map()">回到地圖</button></div>`)}
+title();
+</script></body></html>
